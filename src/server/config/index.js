@@ -1,9 +1,9 @@
-var configValues = require('./config');
+const configValues = require('./config');
 
 module.exports = {
 
-    getDbConnectionString() {
-        return 'mongodb://localhost:27017/' + configValues.schemalName;
-    }
+  getDbConnectionString() {
+    return `mongodb://localhost:27017/${configValues.schemalName}`;
+  },
 
-}
+};

@@ -1,45 +1,42 @@
 const userSchema = require('../../models/user');
 
 module.exports = {
-    async login(username, password) {
+  async login(username, password) {
+    let result = true;
 
-        let result = true;
+    await userSchema.find({
+      username,
+      password,
+    }, (err, user) => {
+      if (err) {
+        result = false;
+        throw err;
+      }
 
-        await userSchema.find({
-            username: username,
-            password: password
-        }, (err, user) => {
-            if (err) {
-                result = false;
-                throw err;
-            };
+      if (user.length === 0) {
+        result = false;
+      }
+    });
 
-            if (user.length === 0) {
-                result = false
-            };
+    return result;
+  },
 
-        });
+  async test(username) {
+    let result = 'ahihi sai roi';
 
-        return result;
-    },
+    try {
+      await userSchema.find({
+        username,
+      }, (err, password) => {
+        if (err) throw err;
 
-    async test(username) {
-
-        let result = "ahihi sai roi"
-
-        try {
-            await userSchema.find({
-                username: username
-            }, (err, password) => {
-                if (err) throw err;
-    
-                console.log(password);
-                result = password;
-            });
-        } catch(err) {
-            console.log("Model test: " + err)
-        }
-        
-        return result;
+        console.log(password);
+        result = password;
+      });
+    } catch (err) {
+      console.log(`Model test: ${err}`);
     }
-}
+
+    return result;
+  },
+};
