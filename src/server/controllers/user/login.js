@@ -3,14 +3,26 @@ const userServices = require('../../middleware/user/user');
 
 module.exports = {
 
+  async setDatabase(req, res) {
+
+    try {
+
+      await userServices.setupUser();
+
+    } catch (err) {
+      console.log(`Test: ${err}`);
+    }
+  },
+
   async findUser(req, res) {
     const username = req.params.username;
 
     try {
       // you must wait in here because test of model is waitting OI database
-      const user = await userServices.test(username);
+      const result = await userServices.findUser(username);
 
-      res.send(user);
+      res.send(result);
+
     } catch (err) {
       console.log(`Test: ${err}`);
     }
@@ -24,6 +36,7 @@ module.exports = {
       const result = await userServices.login(username, password);
 
       res.send(result);
+
     } catch (err) {
       console.log(`Login: ${err}`);
     }

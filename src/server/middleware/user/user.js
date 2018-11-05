@@ -21,7 +21,7 @@ module.exports = {
     return result;
   },
 
-  async test(username) {
+  async findUser(username) {
     let result = 'ahihi sai roi';
 
     try {
@@ -38,5 +38,28 @@ module.exports = {
     }
 
     return result;
+  },
+
+  // seed database
+  setupUser() {
+    const users = [
+      {
+        username: 'ha',
+        password: '123',
+      },
+      {
+        username: 'test',
+        password: '221',
+      },
+      {
+        username: 'test',
+        password: '221',
+      },
+    ];
+
+    userSchema.create(users, (err, result) => {
+      console.log(`Error: ${err}`);
+      console.log(`Result: ${result}`);
+    });
   },
 };

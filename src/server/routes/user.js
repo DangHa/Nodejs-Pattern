@@ -4,6 +4,10 @@ const router = express.Router();
 
 const loginController = require('../controllers/user/login');
 
+router.get('/setDatabase', (req, res) => {
+  loginController.setDatabase(req, res);
+});
+
 router.get('/api/login/:username', (req, res) => {
   loginController.findUser(req, res);
 });
