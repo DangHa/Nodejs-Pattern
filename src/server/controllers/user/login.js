@@ -1,44 +1,27 @@
-const userSchema = require('../../models/user');
-const userServices = require('../../middleware/user/user');
+const userServices = require('../../models/userSevices/userQuery');
 
 module.exports = {
 
-  async setDatabase(req, res) {
-
-    try {
-
-      await userServices.setupUser();
-
-    } catch (err) {
-      console.log(`Test: ${err}`);
-    }
+  async setDatabase() {
+    await userServices.setupUser();
   },
 
   async findUser(req, res) {
-    const username = req.params.username;
+    const Username = req.params.username;
 
-    try {
-      // you must wait in here because test of model is waitting OI database
-      const result = await userServices.findUser(username);
+    // you must wait in here because test of model is waitting OI database
+    const result = await userServices.findUser(Username);
 
-      res.send(result);
-
-    } catch (err) {
-      console.log(`Test: ${err}`);
-    }
+    res.send(result);
   },
 
   async login(req, res) {
-    const username = req.body.username;
-    const password = req.body.password;
+    const Username = req.body.username;
+    const Password = req.body.password;
 
-    try {
-      const result = await userServices.login(username, password);
+    const result = await userServices.login(Username, Password);
 
-      res.send(result);
-
-    } catch (err) {
-      console.log(`Login: ${err}`);
-    }
+    res.send(result);
   },
+
 };

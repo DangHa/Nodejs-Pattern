@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Router
-app.use('/user', require('./routes/user')); // this command must behind two commands which use to setting bodyPaser
+app.use('/user', require('./routes/userRoute')); // this command must behind two commands which use to setting bodyPaser
 
 // Connect mongoDB
 mongoose.connect(config.getDbConnectionString());
