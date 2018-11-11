@@ -4,24 +4,19 @@ module.exports = {
   async login(username, password) {
     let result = true;
 
-    try {
-      await userSchema.find({
-        username,
-        password,
-      }, (err, user) => {
-        if (err) {
-          result = false;
-          throw err;
-        }
+    await userSchema.find({
+      username,
+      password,
+    }, (err, user) => {
+      if (err) {
+        result = false;
+        throw console.log(`Model test: ${err}`);
+      }
 
-        if (user.length === 0) {
-          result = false;
-        }
-      });
-    } catch (err) {
-      console.log(`Model test: ${err}`);
-    }
-
+      if (user.length === 0) {
+        result = false;
+      }
+    });
 
     return result;
   },
@@ -29,18 +24,14 @@ module.exports = {
   async findUser(username) {
     let result = 'ahihi sai roi';
 
-    try {
-      await userSchema.find({
-        username,
-      }, (err, password) => {
-        if (err) throw err;
+    await userSchema.find({
+      username,
+    }, (err, user) => {
+      if (err) throw console.log(`finding user error: ${err}`);
 
-        console.log(password);
-        result = password;
-      });
-    } catch (err) {
-      console.log(`Model test: ${err}`);
-    }
+      console.log(user);
+      result = user;
+    });
 
     return result;
   },
